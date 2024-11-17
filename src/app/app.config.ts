@@ -9,14 +9,17 @@ import { connectDataConnectEmulator, getDataConnect } from 'firebase/data-connec
 import { connectorConfig } from './car-generated';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }),
-  provideRouter(routes),
-  provideFirebaseApp(() => {
-    const app = initializeApp(firebaseConfig);
-    // Need to initialize Data Connect with connectorConfig
-    const dataConnect = getDataConnect(app, connectorConfig);
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideRouter(routes),
+    provideFirebaseApp(() => {
+      const app = initializeApp(firebaseConfig);
+      // Need to initialize Data Connect with connectorConfig
+      const dataConnect = getDataConnect(app, connectorConfig);
     connectDataConnectEmulator(dataConnect, "localhost", 9399);
-    return app;
-  }),
-  provideAuth(() => getAuth())]
+      return app;
+    }),
+    provideAuth(() => getAuth())
+  ]
 };
