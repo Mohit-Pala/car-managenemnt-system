@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CarDbService, handleListCarByID } from './services/car-db.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,17 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'car-managenemnt-system';
-}
+
+  carService = inject(CarDbService)
+
+  title = 'dataconnect';
+  id = '11111111222233334444555555555555'
+  car_make = ''
+  car_color =''
+  
+
+
+  resolvePromise() {
+    console.log(handleListCarByID(this.id))
+  }
+} 
